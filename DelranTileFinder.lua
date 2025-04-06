@@ -2,9 +2,21 @@
 local DelranTileFinder = {}
 
 ---@param player IsoPlayer
-function DelranTileFinder:New(player)
-    self.player = player;
-    return self;
+function DelranTileFinder:BuildForPlayer(player)
+    local o = {}
+    setmetatable(o, self)
+    self.__index = self
+    self.startingSquare = player:getSquare();
+    return o;
+end
+
+---@param square IsoGridSquare
+function DelranTileFinder:BuildForSquare(square)
+    local o = {}
+    setmetatable(o, self)
+    self.__index = self
+    self.startingSquare = square;
+    return o;
 end
 
 ---@param directionsToTest IsoDirections[]
@@ -42,7 +54,7 @@ function DelranTileFinder:Find(destionationSquare)
         local distchoice = nil;
 
         for _, possibleSquare in ipairs(choices) do
-            local dist = possibleSquare:DistToProper(self.player);
+            local dist = possibleSquare:DistToProper(self.startingSquare);
             if dist < lowestdist and possibleSquare:canReachTo(destionationSquare) then
                 lowestdist = dist;
                 distchoice = possibleSquare;
@@ -57,10 +69,11 @@ end
 ---@param square IsoGridSquare
 ---@return boolean
 function DelranTileFinder:IsNextToSquare(square)
-    square = luautils.getCorrectSquareForWall(self.player, square);
-    local diffX = math.abs(square:getX() + 0.5 - self.player:getX());
-    local diffY = math.abs(square:getY() + 0.5 - self.player:getY());
-    if diffX <= 1.6 and diffY <= 1.6 and self.player:getSquare():canReachTo(square) then
+    if self.startingSquare == square then return true end;
+
+    local diffX = math.abs(self.startingSquare:getX() + 0.5 - square:getX());
+    local diffY = math.abs(self.startingSquare:getY() + 0.5 - square:getY());
+    if diffX <= 1.6 and diffY <= 1.6 and self.startingSquare:canReachTo(square) then
         return true;
     end
     return false;
