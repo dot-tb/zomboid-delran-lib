@@ -3,7 +3,11 @@ local DelranUtils = {}
 ---Is the passed InventoryItem a bag ?
 ---@param item InventoryItem
 function DelranUtils.IsBackpack(item)
-    return item:IsInventoryContainer() and item:canBeEquipped() == "Back";
+    if item:IsInventoryContainer() then
+        ---@cast item InventoryContainer
+        return item:canBeEquipped() == "Back";
+    end
+    return false
 end
 
 function DelranUtils.IsMouseOverUI()

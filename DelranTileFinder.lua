@@ -25,7 +25,7 @@ function DelranTileFinder.TestAdjacentSquares(directionsToTest, destionationSqua
     for _, direction in ipairs(directionsToTest) do
         local square = destionationSquare:getAdjacentSquare(direction);
         -- for each of them, test that square then if it's 'adjacent' then add it to the table for picking.
-        if square:isFree(false) and AdjacentFreeTileFinder.privTrySquare(destionationSquare, square, {}) then
+        if square:isFree(false) and AdjacentFreeTileFinder.privTrySquare(destionationSquare, square) then
             table.insert(results, square);
         end
     end
@@ -55,7 +55,7 @@ function DelranTileFinder:Find(destionationSquare)
 
         for _, possibleSquare in ipairs(choices) do
             local dist = possibleSquare:DistToProper(self.startingSquare);
-            if dist < lowestdist and possibleSquare:canReachTo(destionationSquare) then
+            if dist < lowestdist then
                 lowestdist = dist;
                 distchoice = possibleSquare;
             end
@@ -73,7 +73,7 @@ function DelranTileFinder:IsNextToSquare(square)
 
     local diffX = math.abs(self.startingSquare:getX() + 0.5 - square:getX());
     local diffY = math.abs(self.startingSquare:getY() + 0.5 - square:getY());
-    if diffX <= 1.6 and diffY <= 1.6 and self.startingSquare:canReachTo(square) then
+    if diffX <= 1.6 and diffY <= 1.6 then
         return true;
     end
     return false;
