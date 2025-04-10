@@ -1,15 +1,18 @@
 ---@class ExecuteCallbackAction: ISBaseTimedAction
 ---@field callback function
+---@field validPredicate function|nil
 ExecuteCallbackAction = ISBaseTimedAction:derive("ExecuteCallbackAction");
 
 ---Execute function even when queue is canceled
 ---@param character IsoPlayer
 ---@param callback function
+---@param validPredicate function|nil
 ---@return ISBaseTimedAction
-function ExecuteCallbackAction:new(character, callback)
+function ExecuteCallbackAction:new(character, callback, validPredicate)
     local o = ISBaseTimedAction.new(self, character);
     ---@type function
     o.callback = callback;
+    o.validPredicate = validPredicate;
     o.stopOnWalk = false;
     o.stopOnRun = false;
     o.maxTime = -1;
@@ -17,16 +20,13 @@ function ExecuteCallbackAction:new(character, callback)
 end
 
 function ExecuteCallbackAction:isValid()
-    return true
+    if not self.validPredicate then return true end;
+    return self.validPredicate();
 end
 
-function ExecuteCallbackAction:update()
-    self:perform()
-end
-
-function ExecuteCallbackAction:perform()
-    self.callback();
-    ISBaseTimedAction.perform(self);
+function ExecuteCallbackAction:start()
+    self:callback();
+    self:forceComplete();
 end
 
 function ExecuteCallbackAction:forceCancel()
