@@ -25,12 +25,8 @@ function ExecuteCallbackAction:isValid()
 end
 
 function ExecuteCallbackAction:start()
-    self:callback()
+    self:callback();
     self:forceComplete();
-end
-
-function ExecuteCallbackAction:perform()
-    ISBaseTimedAction.perform(self);
 end
 
 function ExecuteCallbackAction:forceCancel()
