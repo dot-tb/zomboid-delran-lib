@@ -1,5 +1,7 @@
 local DelranUtils = {}
 
+local debugEnabled = isDebugEnabled();
+
 ---Is the passed InventoryItem a bag ?
 ---@param item InventoryItem
 function DelranUtils.IsBackpack(item)
@@ -21,7 +23,7 @@ end
 ---@param moduleName string
 function DelranUtils.GetDebugPrint(moduleName)
     return function(...)
-        if isDebugEnabled() then
+        if debugEnabled then
             print(moduleName, " ", ...);
         end
     end
