@@ -2,6 +2,7 @@
 local DelranTileFinder = {}
 
 ---@param player IsoPlayer
+---@return DelranTileFinder
 function DelranTileFinder:BuildForPlayer(player)
     local o = {}
     setmetatable(o, self)
@@ -11,6 +12,7 @@ function DelranTileFinder:BuildForPlayer(player)
 end
 
 ---@param square IsoGridSquare
+---@return DelranTileFinder
 function DelranTileFinder:BuildForSquare(square)
     local o = {}
     setmetatable(o, self)
