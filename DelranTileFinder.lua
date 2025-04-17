@@ -33,7 +33,6 @@ function DelranTileFinder.TestAdjacentSquares(directionsToTest, destionationSqua
     end
 end
 
----comment
 ---@param destionationSquare IsoGridSquare
 ---@return IsoGridSquare|nil
 function DelranTileFinder:Find(destionationSquare)

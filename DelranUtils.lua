@@ -29,4 +29,22 @@ function DelranUtils.GetDebugPrint(moduleName)
     end
 end
 
+---@param config {[string]: any}
+function DelranUtils.ExtractModOptions(config)
+    ---@param self ModOptions.Options
+    return function(self)
+        for k, v in pairs(self.dict) do
+            if v.type == "multipletickbox" then
+                for i = 1, #v.values do
+                    config[(k .. "_" .. tostring(i))] = v:getValue(i)
+                end
+            elseif v.type == "button" then
+                -- do nothing
+            else
+                config[k] = v:getValue()
+            end
+        end
+    end
+end
+
 return DelranUtils

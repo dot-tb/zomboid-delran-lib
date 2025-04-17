@@ -1,0 +1,27 @@
+---@alias float number
+---@alias int integer
+
+---@alias ModOption {
+---     type: string,
+---     id: string,
+---     name: string,
+---     value: any,
+---     tooltip: string,
+---     isEnabled: boolean,
+---     values: {name: string, value: any, isEnabled: boolean}[],
+---     nameToIndex: {[string]: number},
+---     getValue: fun(self: ModOption, index: number|nil): any,
+---     setValue: fun(self: ModOption, index: number|nil, value: any),
+---     setEnabled: fun(self: ModOption, bool: boolean)
+--- }
+
+---@alias ModOptions.Options {
+---     data: table,
+---     dict: {[string]: ModOption},
+---     modOptionsID: string,
+---     name: string,
+---     apply: function,
+---     addDescription: fun(self: ModOptions.Options, desc: string),
+---     addSeparator: fun(),
+---     addTickBox: fun(self: ModOptions.Options, id: string, name: string, value: any, _tooltip: string|nil),
+--- }
