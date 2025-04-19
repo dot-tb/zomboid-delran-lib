@@ -23,5 +23,11 @@
 ---     apply: function,
 ---     addDescription: fun(self: ModOptions.Options, desc: string),
 ---     addSeparator: fun(),
----     addTickBox: fun(self: ModOptions.Options, id: string, name: string, value: any, _tooltip: string|nil),
+---     addComboBox: fun(self: ModOptions.Options, id: string, name: string, _tooltip: string|nil),
+---     addMultipleTickBox: fun(self: ModOptions.Options, id: string, name: string, _tooltip: string|nil),
+---     addTickBox: fun(self: ModOptions.Options, id: string, name: string, value: boolean, _tooltip: string|nil),
+---     addKeyBind: fun(self: ModOptions.Options, id: string, name: string, key: integer, _tooltip: string|nil),
+---     addSlider: fun(self: ModOptions.Options, id: string, name: string, min: float, max: float, step: float, value: float, _tooltip: string|nil),
+---     addColorPicker: fun(self: ModOptions.Options, id: string, name: string, r: float, g: float, b: float, a: float, _tooltip: string|nil),
+---     addButton: fun(self: ModOptions.Options, id: string, _tooltip: string|nil, onclickfunc: function, target: any, arg1: any, arg2: any, arg3: any, arg4: any),
 --- }
